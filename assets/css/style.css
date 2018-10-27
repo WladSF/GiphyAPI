@@ -1,3 +1,27 @@
 .jumbotron {
     background-color: cornflowerblue;
 }
+
+div.card {
+    float: right;
+    top: 20px;
+    position: absolute;
+    right: 40px;
+}
+
+div.container {
+   
+}
+
+button.animals {
+    margin: 5px;
+
+}
+
+div#buttons {
+    float: left;
+}
+
+h1.display-4 {
+    width: 50%;
+}

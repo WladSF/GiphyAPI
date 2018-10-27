@@ -16,35 +16,64 @@ $(document).ready(function () {
         //Array of strings stored into variable 'topics'
         var topics = ["Snakes", "Sharks", "Bears", "Cats", "Dogs", "Skunks", "Racoons", "Crocodiles", "Birds", "Lizards"]
 
-        //Function to create and print buttons for each string in the array (topics)
-        function renderButtons() {
-                $("#buttons").empty(); //This .empty method empties and populate the html with the loop below
-                for (var i = 0; i < topics.length; i++) {
-                        var b = $("<button>");
-                        b.addClass("animals");
-                        b.attr("animal-name", topics[i]);
-                        b.text(topics[i]);
-                        $("#buttons").append(b);
-                }
-        }
-
         //Function to display the gifs on the screen after running through the api (button pressed)
         function displayResults() {
-                var subject = $(this).attr("animal-name"); //Passing the animal name into a variable named subject
-                var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=WfqTJJFDDTIrfk061oJHowQnGGylvPvI";
+                $("#display").html("");
+                var subject = $(this).attr("data-name"); //Passing the animal name into a variable named subject
+                var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=WfqTJJFDDTIrfk061oJHowQnGGylvPvI=10";
 
                 //AJAX call
                 $.ajax({
                         url: queryURL,
                         method: "GET",
                 }).then(function (response) {
+                        var results = response.data;
                         console.log(response);
-        
-                        for (var i = 0; i < response.data.length; i++);
+
+                        for (var i = 0; i < reults.length; i++);
+                        var size = results[i].images
                         console.log(results);
 
+                        var image = $("<img>");
+                        image.attr("src", size.fixed_height_still.url)
+                        image.attr("id", i);
+                        image.attr("display-status", "still")
+                        var rated = $("<p>")
+                        rated.text('Rating: ' + results[i].rating.toUpperCase());
+                        $("#display").append(image);
+                        $("#display").append(rated);
                 })
         }
+
+        //Function to create and print buttons for each string in the array (topics)
+        function renderButtons() {
+                $("#buttons").empty(); //This .empty method empties and populate the html with the loop below
+                for (var i = 0; i < topics.length; i++) {
+                        var b = $("<button>");
+                        b.addClass("animals");
+                        b.attr("data-name", topics[i]);
+                        b.text(topics[i]);
+                        $("#buttons").append(b);
+                }
+        }
+
+        $("#add-animal").on("click", function (event) {
+                event.preventDefault();
+                var animal = $("#animal-input").val().trim();
+                topics.push(animal);
+                renderButtons();
+        });
+
+        $("#clearBtns").click(function () {
+                topics = ["Snakes", "Sharks", "Bears", "Cats", "Dogs", "Skunks", "Racoons", "Crocodiles", "Birds", "Lizards"];
+                renderButtons();
+        })
+
+        $("#clear").click(function () {
+                $("#display").html("");
+        })
+
+        $(document).on("click", ".button", displayResults);
 
         renderButtons();
 
