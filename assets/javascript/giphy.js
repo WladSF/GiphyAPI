@@ -18,7 +18,7 @@ $(document).ready(function () {
 
         //Function to display the gifs on the screen after running through the api (button pressed)
         function displayResults() {
-                $("#display").html("");
+                $("#display").empty();
                 var subject = $(this).attr("data-name");                     //Passing the animal name into a variable named subject
                 var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=WfqTJJFDDTIrfk061oJHowQnGGylvPvI&limit=10";
 
@@ -31,17 +31,27 @@ $(document).ready(function () {
                         console.log(results);
 
                         for (var i = 0; i < results.length; i++){
-                        var size = results[i].images
+                        // var size = results[i].images;
                         console.log(results);
 
+                        var row = $("<div class=\"row justify-content-center\">");
+                        $("#display").append(row);
+                        var both = $("<div class=\"col-lg-3 col-sm-12\">");
+
+                        var animated = results[i].images.fixed_height.url;
+                        var still = results[i].images.fixed_height_still.url;
+
                         var image = $("<img>");
-                        image.attr("src", results[i].images.fixed_height_still.url)
-                        image.attr("id", i);
-                        image.attr("display-status", "still")
+                        image.attr("src", still);
+                        image.attr("data-still", still);
+                        image.attr("data-animate", animated);
+                        image.attr("data-still", still);
+
                         var rated = $("<p>")
                         rated.text('Rating: ' + results[i].rating.toUpperCase());
                         $("#display").append(image);
                         $("#display").append(rated);
+                        $(row).append(both);
                         };
                 })         
 
@@ -59,9 +69,33 @@ $(document).ready(function () {
                 }
         }
 
+        $(document).on("click", "img", function(){
+                var state = $(this).attr("data-state");
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");    
+                } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");   
+                }          
+        });
+
+
         $("#add-animal").on("click", function (event) {
                 event.preventDefault();
                 var animal = $("#animal-input").val().trim();
+                if(animal.length > 2) {
+                        alert('Choose an animal. No blank spaces!')
+                        topics.push(animal);
+                        // var animal = $("#animal-input").val('');
+                    } else if (topics.includes(animal) === false) {
+                        // topics.push(animal);
+                        renderButtons();
+                        var animal = $("#animal-input").val('');
+                    } else {
+                        alert('Button Already Exists! Choose a new label.')
+                        var animal = $("#animal-input").val('');
+                    }
                 topics.push(animal);
                 renderButtons();
         });

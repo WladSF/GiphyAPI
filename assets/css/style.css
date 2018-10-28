@@ -9,10 +9,8 @@ div.card {
     right: 40px;
 }
 
-
 button.animals {
     margin: 5px;
-
 }
 
 div#buttons {
@@ -23,3 +21,4 @@ div#buttons {
 h1.display-4 {
     width: 50%;
 }
+
