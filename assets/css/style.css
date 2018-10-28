@@ -9,9 +9,6 @@ div.card {
     right: 40px;
 }
 
-div.container {
-   
-}
 
 button.animals {
     margin: 5px;
@@ -20,6 +17,7 @@ button.animals {
 
 div#buttons {
     float: left;
+    width: 70%;
 }
 
 h1.display-4 {

@@ -19,8 +19,8 @@ $(document).ready(function () {
         //Function to display the gifs on the screen after running through the api (button pressed)
         function displayResults() {
                 $("#display").html("");
-                var subject = $(this).attr("data-name"); //Passing the animal name into a variable named subject
-                var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=WfqTJJFDDTIrfk061oJHowQnGGylvPvI=10";
+                var subject = $(this).attr("data-name");                     //Passing the animal name into a variable named subject
+                var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=WfqTJJFDDTIrfk061oJHowQnGGylvPvI&limit=10";
 
                 //AJAX call
                 $.ajax({
@@ -28,21 +28,23 @@ $(document).ready(function () {
                         method: "GET",
                 }).then(function (response) {
                         var results = response.data;
-                        console.log(response);
+                        console.log(results);
 
-                        for (var i = 0; i < reults.length; i++);
+                        for (var i = 0; i < results.length; i++){
                         var size = results[i].images
                         console.log(results);
 
                         var image = $("<img>");
-                        image.attr("src", size.fixed_height_still.url)
+                        image.attr("src", results[i].images.fixed_height_still.url)
                         image.attr("id", i);
                         image.attr("display-status", "still")
                         var rated = $("<p>")
                         rated.text('Rating: ' + results[i].rating.toUpperCase());
                         $("#display").append(image);
                         $("#display").append(rated);
-                })
+                        };
+                })         
+
         }
 
         //Function to create and print buttons for each string in the array (topics)
@@ -73,7 +75,7 @@ $(document).ready(function () {
                 $("#display").html("");
         })
 
-        $(document).on("click", ".button", displayResults);
+        $(document).on("click", "button", displayResults);
 
         renderButtons();
 
