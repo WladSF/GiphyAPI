@@ -14,7 +14,18 @@
 $(document).ready(function () {
 
         //Array of strings stored into variable 'topics'
-        var topics = ["Snakes", "Sharks", "Bears", "Cats", "Dogs", "Skunks", "Racoons", "Crocodiles", "Birds", "Lizards"]
+        var topics = ["skateboard", "kitesurf", "rollerskate", "bicycle", "bobsled", "zipline", "paraglide"]
+
+        function renderButtons() {
+                $("#buttons").empty(); //This .empty method empties and populate the html with the loop below
+                for (var i = 0; i < topics.length; i++) {
+                        var b = $("<button>");
+                        b.addClass("sports");
+                        b.attr("data-name", topics[i]);
+                        b.text(topics[i]);
+                        $("#buttons").append(b);
+                }
+        }
 
         //Function to display the gifs on the screen after running through the api (button pressed)
         function displayResults() {
@@ -30,83 +41,60 @@ $(document).ready(function () {
                         var results = response.data;
                         console.log(results);
 
-                        for (var i = 0; i < results.length; i++){
-                        // var size = results[i].images;
-                        console.log(results);
+                        for (var i = 0; i < results.length; i++) {
 
-                        var row = $("<div class=\"row justify-content-center\">");
-                        $("#display").append(row);
-                        var both = $("<div class=\"col-lg-3 col-sm-12\">");
+                                var animated = results[i].images.fixed_height.url;
+                                var still = results[i].images.fixed_height_still.url;
 
-                        var animated = results[i].images.fixed_height.url;
-                        var still = results[i].images.fixed_height_still.url;
+                                
+                                var image = $("<img>");
+                                image.attr("src", still);
+                                image.attr("data-still", still);
+                                image.attr("data-animate", animated);
+                                image.attr("data-still", still);
 
-                        var image = $("<img>");
-                        image.attr("src", still);
-                        image.attr("data-still", still);
-                        image.attr("data-animate", animated);
-                        image.attr("data-still", still);
-
-                        var rated = $("<p>")
-                        rated.text('Rating: ' + results[i].rating.toUpperCase());
-                        $("#display").append(image);
-                        $("#display").append(rated);
-                        $(row).append(both);
+                                var rated = $("<p>").text('Rating: ' + results[i].rating.toUpperCase());
+                                $("#display").append(image);
+                                $("#display").append(rated);
                         };
-                })         
+                })
 
         }
 
-        //Function to create and print buttons for each string in the array (topics)
-        function renderButtons() {
-                $("#buttons").empty(); //This .empty method empties and populate the html with the loop below
-                for (var i = 0; i < topics.length; i++) {
-                        var b = $("<button>");
-                        b.addClass("animals");
-                        b.attr("data-name", topics[i]);
-                        b.text(topics[i]);
-                        $("#buttons").append(b);
-                }
-        }
-
-        $(document).on("click", "img", function(){
+        $(document).on("click", "img", function () {
                 var state = $(this).attr("data-state");
                 if (state === "still") {
-                    $(this).attr("src", $(this).attr("data-animate"));
-                    $(this).attr("data-state", "animate");    
+                        $(this).attr("src", $(this).attr("data-animate"));
+                        $(this).attr("data-state", "animate");
                 } else {
-                    $(this).attr("src", $(this).attr("data-still"));
-                    $(this).attr("data-state", "still");   
-                }          
+                        $(this).attr("src", $(this).attr("data-still"));
+                        $(this).attr("data-state", "still");
+                }
         });
 
 
-        $("#add-animal").on("click", function (event) {
+        $("#add-sport").on("click", function (event) {
                 event.preventDefault();
-                var animal = $("#animal-input").val().trim();
-                if(animal.length > 2) {
-                        alert('Choose an animal. No blank spaces!')
-                        topics.push(animal);
-                        // var animal = $("#animal-input").val('');
-                    } else if (topics.includes(animal) === false) {
-                        // topics.push(animal);
-                        renderButtons();
-                        var animal = $("#animal-input").val('');
-                    } else {
+                var sport = $("#sport-input").val().trim();
+                if (sport === "") {
+                        alert('Choose a sport. No blank spaces!')
+                } else if (topics.includes(sport)) {
+                        $("#sport-input").val("");
                         alert('Button Already Exists! Choose a new label.')
-                        var animal = $("#animal-input").val('');
-                    }
-                topics.push(animal);
-                renderButtons();
+                } else {
+                        topics.push(sport);
+                        $("#sport-input").val("");
+                        renderButtons();
+                }
         });
 
         $("#clearBtns").click(function () {
-                topics = ["Snakes", "Sharks", "Bears", "Cats", "Dogs", "Skunks", "Racoons", "Crocodiles", "Birds", "Lizards"];
+                topics = ["skateboard", "kitesurf", "rollerskate", "bicycle", "bobsled", "zipline", "paraglide"];
                 renderButtons();
         })
 
         $("#clear").click(function () {
-                $("#display").html("");
+                $("#display").empty();
         })
 
         $(document).on("click", "button", displayResults);
