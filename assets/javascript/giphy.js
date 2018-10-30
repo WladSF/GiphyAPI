@@ -75,12 +75,14 @@ $(document).ready(function () {
 
         $("#add-sport").on("click", function (event) {
                 event.preventDefault();
-                var sport = $("#sport-input").val().trim();
+                var sport = $("#sport-input").val().trim().toLowerCase();
                 if (sport === "") {
-                        alert('Choose a sport. No blank spaces!')
+                        alert("No blank spaces, choose a subject!")
+                        // $("#mymModal").modal('show');
                 } else if (topics.includes(sport)) {
                         $("#sport-input").val("");
-                        alert('Button Already Exists! Choose a new label.')
+                        alert('Subject already exists, choose a new one!')
+                        // $("#myModal").modal('show');
                 } else {
                         topics.push(sport);
                         $("#sport-input").val("");
@@ -94,7 +96,7 @@ $(document).ready(function () {
         })
 
         $("#clear").click(function () {
-                $("#display").empty();
+                $("#display").empty().val("");
                 console.log(clear);
         })
 
