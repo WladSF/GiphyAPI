@@ -1,12 +1,28 @@
 .jumbotron {
-    background-color: cornflowerblue;
+    background-image: url("../Images/low_poly_wallpaper_by_atty12-d74s7oc.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
-div.card {
-    float: right;
-    top: 20px;
+h1 {
+    color: white;
+}
+
+.list-group-item {
+    width: 90%;
+    text-align: center;
+    padding: 5px 0px;
+    margin: 0 auto;
+
+}
+
+ul.list-group.list-group-flush {
+    width: 32%;
+    margin: 0 ;
     position: absolute;
-    right: 40px;
+    top: 70px;
+    right: 60px;
+
 }
 
 button.sports {
@@ -16,9 +32,8 @@ button.sports {
     
 }
 
-div#buttons {
-   
-    width: 70%;
+#buttons {
+    width: 65%;  
 }
 
 h1.display-4 {
@@ -28,11 +43,19 @@ h1.display-4 {
 img {
     width: 300px;
     height: 200px;
-    text-align: center;
-
+    float: left;
+    padding: 15px;
+    margin: 0 20px;
 }
 
-#display {
+#sport-input {
     text-align: center;
+    width: 60%;
 }
 
+
+ #add-sport, #clear, #clearBtns {
+    margin: 5px;
+    border: solid 2px black;
+    border-radius: 10px;
+} 

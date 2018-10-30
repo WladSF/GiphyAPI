@@ -14,7 +14,7 @@
 $(document).ready(function () {
 
         //Array of strings stored into variable 'topics'
-        var topics = ["skateboard", "kitesurf", "rollerskate", "bicycle", "bobsled", "zipline", "paraglide"]
+        var topics = ["scuba dive", "kitesurf", "rollerskate", "bicycle", "snowboarding", "zipline", "paraglide"]
 
         function renderButtons() {
                 $("#buttons").empty(); //This .empty method empties and populate the html with the loop below
@@ -55,7 +55,7 @@ $(document).ready(function () {
 
                                 var rated = $("<p>").text('Rating: ' + results[i].rating.toUpperCase());
                                 $("#display").append(image);
-                                $("#display").append(rated);
+                                $("img").prepend(rated);
                         };
                 })
 
@@ -89,12 +89,13 @@ $(document).ready(function () {
         });
 
         $("#clearBtns").click(function () {
-                topics = ["skateboard", "kitesurf", "rollerskate", "bicycle", "bobsled", "zipline", "paraglide"];
+                topics = ["scuba dive", "kitesurf", "rollerskate", "bicycle", "snowboarding", "zipline", "paraglide"];
                 renderButtons();
         })
 
         $("#clear").click(function () {
                 $("#display").empty();
+                console.log(clear);
         })
 
         $(document).on("click", "button", displayResults);
