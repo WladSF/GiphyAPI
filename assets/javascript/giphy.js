@@ -29,7 +29,6 @@ $(document).ready(function () {
 
         //Function to display the gifs on the screen after running through the api (button pressed)
         function displayResults() {
-                // $("#display").empty();
                 var subject = $(this).attr("data-name");                     //Passing the animal name into a variable named subject
                 var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=WfqTJJFDDTIrfk061oJHowQnGGylvPvI&limit=10";
 
@@ -46,19 +45,19 @@ $(document).ready(function () {
                                 var animated = results[i].images.fixed_height.url;
                                 var still = results[i].images.fixed_height_still.url;
 
-                                
+                                var wrapper = $('<div>');
+                                wrapper.addClass("wrapper");
                                 var image = $("<img>");
                                 image.attr("src", still);
                                 image.attr("data-still", still);
                                 image.attr("data-animate", animated);
                                 image.attr("data-still", still);
-
                                 var rated = $("<p>").text('Rating: ' + results[i].rating.toUpperCase());
-                                $("#display").append(image);
-                                $("img").prepend(rated);
+                                $("#display").prepend(wrapper);
+                                wrapper.append(image);
+                                wrapper.append(rated);
                         };
                 })
-
         }
 
         $(document).on("click", "img", function () {
@@ -72,17 +71,16 @@ $(document).ready(function () {
                 }
         });
 
-
         $("#add-sport").on("click", function (event) {
                 event.preventDefault();
                 var sport = $("#sport-input").val().trim().toLowerCase();
                 if (sport === "") {
                         alert("No blank spaces, choose a subject!")
-                        // $("#mymModal").modal('show');
+
                 } else if (topics.includes(sport)) {
                         $("#sport-input").val("");
                         alert('Subject already exists, choose a new one!')
-                        // $("#myModal").modal('show');
+
                 } else {
                         topics.push(sport);
                         $("#sport-input").val("");

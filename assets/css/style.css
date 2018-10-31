@@ -22,7 +22,6 @@ ul.list-group.list-group-flush {
     position: absolute;
     top: 70px;
     right: 60px;
-
 }
 
 button.sports {
@@ -43,7 +42,6 @@ h1.display-4 {
 img {
     width: 300px;
     height: 200px;
-    float: left;
     padding: 15px;
     margin: 0 20px;
 }
@@ -53,9 +51,16 @@ img {
     width: 60%;
 }
 
-
  #add-sport, #clear, #clearBtns {
     margin: 5px;
     border: solid 2px black;
     border-radius: 10px;
 } 
+
+.wrapper  {
+    display: inline-block;
+}
+
+.wrapper p {
+    text-align: center;
+}
