@@ -30,7 +30,7 @@ $(document).ready(function () {
         //Function to display the gifs on the screen after running through the api (button pressed)
         function displayResults() {
                 var subject = $(this).attr("data-name");                     //Passing the animal name into a variable named subject
-                var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=WfqTJJFDDTIrfk061oJHowQnGGylvPvI&limit=10";
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=WfqTJJFDDTIrfk061oJHowQnGGylvPvI&limit=10";
 
                 //AJAX call
                 $.ajax({
