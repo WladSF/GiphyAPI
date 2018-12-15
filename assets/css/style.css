@@ -13,22 +13,22 @@ h1 {
     text-align: center;
     padding: 5px 0px;
     margin: 0 auto;
-    border-radius: 15px;
+
 }
 
 ul.list-group.list-group-flush {
     width: 32%;
     margin: 0 ;
-    /* position: absolute; */
-    top: 30px;
-    right: 20px;
-    float: right;
+    position: absolute;
+    top: 70px;
+    right: 60px;
 }
 
 button.sports {
     margin: 5px;
     border: solid 2px black;
-    border-radius: 10px;   
+    border-radius: 10px;
+    
 }
 
 #buttons {
@@ -64,9 +64,3 @@ img {
 .wrapper p {
     text-align: center;
 }
-
-@media screen and (max-width: 640px) {
-    section {
-        margin: 0 auto ;     
-        width: 90%;
-    }
